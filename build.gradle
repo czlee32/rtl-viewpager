@@ -112,7 +112,7 @@ publishing {
             }
             def buildAar = tasks.findByName("assemble${variant.name.capitalize()}")
             if (buildAar != null) {
-                tasks["publish${variant.name}PublicationToMavenLocal"].dependsOn(buildAar)
+                tasks["publish${variant.name.capitalize()}PublicationToMavenLocal"].dependsOn(buildAar)
             }
         }
     }
