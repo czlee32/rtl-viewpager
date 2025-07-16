@@ -94,7 +94,7 @@ publishing {
                 }
                 classifier = 'sources'
             }
-            "${variant.name}Publication"(MavenPublication) {
+            "${variant.name}"(MavenPublication) {
                 variant.getPackageLibraryProvider().get().outputs.files.each { output ->
                     artifact output
                 }
