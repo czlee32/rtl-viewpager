@@ -22,7 +22,7 @@ buildscript {
         maven {
             url = 'https://maven.aliyun.com/repository/gradle-plugin'
         }
-        //jcenter()
+        // jcenter()
         google()
     }
     dependencies {
@@ -34,14 +34,15 @@ buildscript {
 Properties localProperties = new Properties()
 localProperties.load(file('local.properties').newDataInputStream())
 
-String VERSION = '2.0.0'
+// String VERSION = '2.0.0'
+String VERSION = '940f12724f'
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.jfrog.bintray'
+// apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
 repositories {
-    //jcenter()
+    // jcenter()
     maven {
         url = 'https://maven.aliyun.com/repository/public'
     }
@@ -63,25 +64,25 @@ dependencies {
     compileOnly 'androidx.viewpager:viewpager:1.0.0'
 }
 
-bintray {
-    user = localProperties.getProperty('bintray.user')
-    key = localProperties.getProperty('bintray.key')
-    publications = ['releasePublication']
-    publish = false
-    pkg {
-        repo = 'maven'
-        name = 'com.duolingo.open:rtl-viewpager'
-        userOrg = 'duolingo'
-        issueTrackerUrl = 'https://github.com/duolingo/rtl-viewpager/issues'
-        vcsUrl = 'https://github.com/duolingo/rtl-viewpager.git'
-        licenses = ['Apache-2.0']
-        publicDownloadNumbers = true
-        version {
-            name = VERSION
-            vcsTag = 'v' + VERSION
-        }
-    }
-}
+// bintray {
+//     user = localProperties.getProperty('bintray.user')
+//     key = localProperties.getProperty('bintray.key')
+//     publications = ['releasePublication']
+//     publish = false
+//     pkg {
+//         repo = 'maven'
+//         name = 'com.duolingo.open:rtl-viewpager'
+//         userOrg = 'duolingo'
+//         issueTrackerUrl = 'https://github.com/duolingo/rtl-viewpager/issues'
+//         vcsUrl = 'https://github.com/duolingo/rtl-viewpager.git'
+//         licenses = ['Apache-2.0']
+//         publicDownloadNumbers = true
+//         version {
+//             name = VERSION
+//             vcsTag = 'v' + VERSION
+//         }
+//     }
+// }
 
 publishing {
     publications {
