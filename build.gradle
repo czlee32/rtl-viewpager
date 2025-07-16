@@ -86,22 +86,51 @@ dependencies {
 
 publishing {
     publications {
-        android.libraryVariants.all { variant ->
-            def sources = task "${variant.name}Sources"(type: Jar) {
-                variant.getSourceSets().each { sourceSet ->
-                    from sourceSet.getManifestFile()
-                    from sourceSet.getJavaDirectories()
+        // android.libraryVariants.all { variant ->
+        //     def sources = task "${variant.name}Sources"(type: Jar) {
+        //         variant.getSourceSets().each { sourceSet ->
+        //             from sourceSet.getManifestFile()
+        //             from sourceSet.getJavaDirectories()
+        //         }
+        //         classifier = 'sources'
+        //     }
+        //     "${variant.name}Publication"(MavenPublication) {
+        //         variant.getPackageLibraryProvider().get().outputs.files.each { output ->
+        //             artifact output
+        //         }
+        //         artifact sources
+        //         groupId 'com.duolingo.open'
+        //         artifactId 'rtl-viewpager'
+        //         version VERSION
+        //         pom.withXml {
+        //             def license = asNode().appendNode('licenses').appendNode('license')
+        //             license.appendNode('name', 'Apache License, Version 2.0')
+        //             license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0')
+        //             license.appendNode('distribution', 'repo')
+        //             asNode().appendNode('scm').appendNode('url', 'https://github.com/duolingo/rtl-viewpager')
+        //         }
+        //     }
+        // }
+        release(MavenPublication) {
+                def releaseVariant = android.libraryVariants.find { it.name == 'release' }
+
+                def sources = task("releaseSources", type: Jar) {
+                    releaseVariant.getSourceSets().each { sourceSet ->
+                        from sourceSet.getManifestFile()
+                        from sourceSet.getJavaDirectories()
+                    }
+                    classifier = 'sources'
                 }
-                classifier = 'sources'
-            }
-            "${variant.name}Publication"(MavenPublication) {
-                variant.getPackageLibraryProvider().get().outputs.files.each { output ->
+
+                releaseVariant.getPackageLibraryProvider().get().outputs.files.each { output ->
                     artifact output
                 }
                 artifact sources
-                groupId 'com.duolingo.open'
-                artifactId 'rtl-viewpager'
-                version VERSION
+
+                groupId = 'com.duolingo.open'
+                artifactId = 'rtl-viewpager'
+                version = VERSION
+
                 pom.withXml {
                     def license = asNode().appendNode('licenses').appendNode('license')
                     license.appendNode('name', 'Apache License, Version 2.0')
@@ -110,6 +139,5 @@ publishing {
                     asNode().appendNode('scm').appendNode('url', 'https://github.com/duolingo/rtl-viewpager')
                 }
             }
-        }
     }
 }
