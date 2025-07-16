@@ -87,10 +87,6 @@ dependencies {
 publishing {
     publications {
         android.libraryVariants.all { variant ->
-            def buildAar = tasks.findByName("assemble${variant.name.capitalize()}")
-            if (buildAar != null) {
-                tasks["publish${variant.name.capitalize()}PublicationToMavenLocal"].dependsOn(buildAar)
-            }
             def sources = task "${variant.name}Sources"(type: Jar) {
                 variant.getSourceSets().each { sourceSet ->
                     from sourceSet.getManifestFile()
@@ -99,6 +95,10 @@ publishing {
                 classifier = 'sources'
             }
             "${variant.name}Publication"(MavenPublication) {
+                def buildAar = tasks.findByName("assemble${variant.name.capitalize()}")
+                if (buildAar != null) {
+                    dependsOn(buildAar)
+                }
                 variant.getPackageLibraryProvider().get().outputs.files.each { output ->
                     artifact output
                 }
