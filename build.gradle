@@ -31,8 +31,8 @@ buildscript {
     }
 }
 
-Properties localProperties = new Properties()
-localProperties.load(file('local.properties').newDataInputStream())
+// Properties localProperties = new Properties()
+// localProperties.load(file('local.properties').newDataInputStream())
 
 // String VERSION = '2.0.0'
 String VERSION = '940f12724f'
