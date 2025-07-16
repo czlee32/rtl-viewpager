@@ -16,7 +16,13 @@
 
 buildscript {
     repositories {
-        jcenter()
+        maven {
+            url = 'https://maven.aliyun.com/repository/public'
+        }
+        maven {
+            url = 'https://maven.aliyun.com/repository/gradle-plugin'
+        }
+        //jcenter()
         google()
     }
     dependencies {
@@ -35,7 +41,10 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
 repositories {
-    jcenter()
+    //jcenter()
+    maven {
+        url = 'https://maven.aliyun.com/repository/public'
+    }
     google()
 }
 
